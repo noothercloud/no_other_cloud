@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/no_other_cloud/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/no_other_cloud/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/no_other_cloud/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/no_other_cloud/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/no_other_cloud/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"noothercloud.github.io","root":"/no_other_cloud/","images":"/no_other_cloud/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/no_other_cloud/js/config.js" defer></script>
+
+    <meta name="description" content="转专业期中复习为什么突然开这个呢？主要是给自己学习cpp的过程留个档快期中了临阵抱佛脚 1关于动态数组在埃筛的应用 首先是vector动态数组的介绍 定义：std::vector 是一个可以在运行时动态改变大小的序列容器，存储元素在内存中是连续的，就像普通数组一样。特点：动态扩容：向 vector 添加元素时，如果容量不足，容器会自动分配更大的连续内存，并将已有元素拷贝过去。随机访问：支持下标访问">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一点cpp（1）">
+<meta property="og:url" content="http://noothercloud.github.io/no_other_cloud/2026/03/30/%E4%B8%80%E7%82%B9cpp%EF%BC%881%EF%BC%89/index.html">
+<meta property="og:site_name" content="充满了神入の神秘blog">
+<meta property="og:description" content="转专业期中复习为什么突然开这个呢？主要是给自己学习cpp的过程留个档快期中了临阵抱佛脚 1关于动态数组在埃筛的应用 首先是vector动态数组的介绍 定义：std::vector 是一个可以在运行时动态改变大小的序列容器，存储元素在内存中是连续的，就像普通数组一样。特点：动态扩容：向 vector 添加元素时，如果容量不足，容器会自动分配更大的连续内存，并将已有元素拷贝过去。随机访问：支持下标访问">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-29T19:51:28.000Z">
+<meta property="article:modified_time" content="2026-03-29T19:52:49.617Z">
+<meta property="article:author" content="充满了神入">
+<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://noothercloud.github.io/no_other_cloud/2026/03/30/%E4%B8%80%E7%82%B9cpp%EF%BC%881%EF%BC%89/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://noothercloud.github.io/no_other_cloud/2026/03/30/%E4%B8%80%E7%82%B9cpp%EF%BC%881%EF%BC%89/","path":"2026/03/30/一点cpp（1）/","title":"一点cpp（1）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>一点cpp（1） | 充满了神入の神秘blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/no_other_cloud/js/utils.js" defer></script><script src="/no_other_cloud/js/motion.js" defer></script><script src="/no_other_cloud/js/sidebar.js" defer></script><script src="/no_other_cloud/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/no_other_cloud/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/no_other_cloud/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">充满了神入の神秘blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">开发不了一点</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BD%AC%E4%B8%93%E4%B8%9A%E6%9C%9F%E4%B8%AD%E5%A4%8D%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">转专业期中复习</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%82%A3%E4%B9%88%EF%BC%8C%E5%B0%B1%E6%9D%A5%E5%87%A0%E9%81%93%E5%85%B7%E4%BD%93%E7%9A%84%E9%A2%98%E7%9B%AE%E5%90%A7"><span class="nav-number">1.1.</span> <span class="nav-text">那么，就来几道具体的题目吧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E8%BF%91%E5%8F%91%E7%8E%B0%E8%87%AA%E5%B7%B1%E4%BC%BC%E4%B9%8E%E4%B8%80%E4%BA%9B%E7%BA%AF%E9%80%BB%E8%BE%91%E7%9A%84%E8%87%AA%E5%A2%9E%E8%83%BD%E5%8A%9B%E4%B8%8D%E6%98%AF%E5%BE%88%E5%BC%BA"><span class="nav-number">1.2.</span> <span class="nav-text">最近发现自己似乎一些纯逻辑的自增能力不是很强</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">充满了神入</p>
+  <div class="site-description" itemprop="description">一个绝望的神秘人</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/no_other_cloud/archives/">
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://noothercloud.github.io/no_other_cloud/2026/03/30/%E4%B8%80%E7%82%B9cpp%EF%BC%881%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/no_other_cloud/images/avatar.gif">
+      <meta itemprop="name" content="充满了神入">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="充满了神入の神秘blog">
+      <meta itemprop="description" content="一个绝望的神秘人">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="一点cpp（1） | 充满了神入の神秘blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一点cpp（1）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-03-30 03:51:28 / 修改时间：03:52:49" itemprop="dateCreated datePublished" datetime="2026-03-30T03:51:28+08:00">2026-03-30</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="转专业期中复习"><a href="#转专业期中复习" class="headerlink" title="转专业期中复习"></a>转专业期中复习</h1><p>为什么突然开这个呢？主要是给自己学习cpp的过程留个档<del>快期中了临阵抱佛脚</del></p>
+<p><strong>1关于动态数组在埃筛的应用</strong></p>
+<p>首先是vector动态数组的介绍</p>
+<p>定义：<br>std::vector 是一个可以在运行时动态改变大小的序列容器，存储元素在内存中是连续的，就像普通数组一样。<br>特点：<br>动态扩容：向 vector 添加元素时，如果容量不足，容器会自动分配更大的连续内存，并将已有元素拷贝过去。<br>随机访问：支持下标访问（v[i] 或 v.at(i)），时间复杂度为 O(1)。<br>尾部高效插入&#x2F;删除：在末尾插入或删除元素时间复杂度为 O(1) 平均。<br>容量管理：可以通过 reserve() 提前分配内存，减少动态扩容次数；size()<br>获取当前元素数量，capacity() 获取分配容量。<br>迭代器支持：可以使用迭代器（begin()、end()）遍历元素，兼容 STL 算法。</p>
+<p><em>总结：stl容器经典款大手子</em></p>
+<p>那么，来个动态数组版埃筛的模版吧</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">sushu</span><span class="params">(<span class="type">int</span> n)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    vector&lt;<span class="type">bool</span>&gt;<span class="built_in">zhishu</span>(n<span class="number">+1</span>,<span class="literal">true</span>);<span class="comment">//定义一个动态数组zhishu[],长度为n+1并赋值为true</span></span><br><span class="line">    zhishu[<span class="number">1</span>]=zhishu[<span class="number">0</span>]=<span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i*i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="comment">//前面01标记完了这里就从2开始了</span></span><br><span class="line">        <span class="keyword">if</span>(zhishu[i])&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=i*i;j&lt;=n;j+=i)&#123;<span class="comment">//我们这里是从2*2开始把所有带有公因数的都标掉</span></span><br><span class="line">            zhishu[j]=<span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;<span class="comment">//在这个位置开始找能剩下一点时间复杂度</span></span><br><span class="line">        ......<span class="comment">//这就看具体题目你要做什么了，实际上，有些题目你前面函数int比较好，有些直接void打穿就行了</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="那么，就来几道具体的题目吧"><a href="#那么，就来几道具体的题目吧" class="headerlink" title="那么，就来几道具体的题目吧"></a>那么，就来几道具体的题目吧</h2><p><em>题目节选：xujcoj.com——<a target="_blank" rel="noopener" href="https://xujcoj.com/home/contest/1871/problem/7">https://xujcoj.com/home/contest/1871/problem/7</a></em></p>
+<p>这道题到手审题会发现 你需要筛的是m,2<em>m的闭区间<br>这个时候我们改模版就要注意vector<strong>动态数组的长度</strong>问题 最好的长度是2</em>n+1</p>
+<p>ac代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">sushu</span><span class="params">(<span class="type">int</span> n)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    vector&lt;<span class="type">bool</span>&gt;<span class="built_in">zhishu</span>(<span class="number">2</span>*n<span class="number">+1</span>,<span class="literal">true</span>);</span><br><span class="line">    zhishu[<span class="number">0</span>]=zhishu[<span class="number">1</span>]=<span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i*i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(zhishu[i])&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=i*i;j&lt;=<span class="number">2</span>*n;j+=i)&#123;</span><br><span class="line">                zhishu[j]=<span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> maxp = <span class="number">-1</span>;   <span class="comment">//起变量名时尽可能不和cmath标准库冲突</span></span><br><span class="line">    <span class="type">int</span> minp = <span class="number">2</span>*n<span class="number">+1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=n;i&lt;=<span class="number">2</span>*n;i++)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(zhishu[i])&#123;<span class="comment">//质数条件一定别忘了</span></span><br><span class="line">        <span class="keyword">if</span>(maxp &lt; i)&#123;</span><br><span class="line">            max = i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(minp &gt; i)&#123;</span><br><span class="line">            min = i;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> maxp - minp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    cin &gt;&gt; a;</span><br><span class="line">    <span class="keyword">while</span>(a--)&#123;</span><br><span class="line">        <span class="type">int</span> num;</span><br><span class="line">        cin &gt;&gt; num;</span><br><span class="line">        cout &lt;&lt; <span class="built_in">sushu</span>(num) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vector数组在长度上真的巨容易越界<del>主播在复盘的时候又敲错了</del><br>总之，这个模版一定要检查的一样东西就是</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;<span class="type">bool</span>&gt;<span class="built_in">zhishu</span>(<span class="comment">/*这里*/</span>,<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<p>不要越界！<br>不要越界！！</p>
+<p>接下来，来几道暴力简单题吧<br>（本篇所有题目皆来自xujcoj.com）<br><em><a target="_blank" rel="noopener" href="https://xujcoj.com/home/contest/1886/problem/7">https://xujcoj.com/home/contest/1886/problem/7</a></em></p>
+<p>这道题我不是用动态数组做的，因为本身是一个简单小题<br>ac：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">sushu</span><span class="params">(<span class="type">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i*i&lt;=n;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(n%i==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    cin &gt;&gt; a;</span><br><span class="line">    <span class="keyword">while</span>(a--)&#123;</span><br><span class="line">        <span class="type">int</span> m;</span><br><span class="line">        cin &gt;&gt; m;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">sushu</span>(m))&#123;</span><br><span class="line">            cout &lt;&lt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span>&#123;</span><br><span class="line">            cout &lt;&lt; <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当巩固埃筛了。</p>
+<p><em><a target="_blank" rel="noopener" href="https://xujcoj.com/home/contest/1886/problem/8">https://xujcoj.com/home/contest/1886/problem/8</a></em></p>
+<p>审题你会发现，这题还是如上思路更简洁，动态数组更适合解决区间问题</p>
+<p>ac如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">sushu</span><span class="params">(<span class="type">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i*i&lt;=n;i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(n%i==<span class="number">0</span>)&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    cin &gt;&gt; a;</span><br><span class="line">    <span class="keyword">while</span>(a--)&#123;</span><br><span class="line">        <span class="type">int</span> num;</span><br><span class="line">        cin &gt;&gt; num;</span><br><span class="line">        <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">sushu</span>(num))&#123;</span><br><span class="line">            sum += num;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; sum &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么实际上就是一个非常简单的求和思路</p>
+<p><em><a target="_blank" rel="noopener" href="https://xujcoj.com/home/contest/1886/problem/9">https://xujcoj.com/home/contest/1886/problem/9</a></em><br>下一题几乎只需要改一改求和思路，变成自增，这里偷懒不敲了</p>
+<p><em><a target="_blank" rel="noopener" href="https://xujcoj.com/home/contest/1886/problem/10">https://xujcoj.com/home/contest/1886/problem/10</a></em></p>
+<p>这道题就可以让我们巩固动态数组的埃筛模版<br>审题看到区间那么直接肢体反应就可以了 实现逻辑和第一题只有微微不同，主要注意动态数组长度越界问题</p>
+<p>ac如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">sushu</span><span class="params">(<span class="type">int</span> n)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    vector&lt;<span class="type">bool</span>&gt;<span class="built_in">zhishu</span>(<span class="number">2</span>*n<span class="number">+1</span>,<span class="literal">true</span>);</span><br><span class="line">    zhishu[<span class="number">1</span>]=zhishu[<span class="number">0</span>]=<span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i*i&lt;=<span class="number">2</span>*n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(zhishu[i])&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=i*i;j&lt;=<span class="number">2</span>*n;j+=i)&#123;</span><br><span class="line">                zhishu[j] = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=n;i&lt;=<span class="number">2</span>*n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(zhishu[i])&#123;</span><br><span class="line">            sum += i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    cin &gt;&gt; a;</span><br><span class="line">    <span class="keyword">while</span>(a--)&#123;</span><br><span class="line">        <span class="type">int</span> num;</span><br><span class="line">        cin &gt;&gt; num;</span><br><span class="line">        cout &lt;&lt; <span class="built_in">sushu</span>(num) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>埃筛最后来一道逻辑上卡了我比较久的题目吧<br><em><a target="_blank" rel="noopener" href="https://xujcoj.com/home/contest/1886/problem/12">https://xujcoj.com/home/contest/1886/problem/12</a></em></p>
+<p>ac如下，不用动态数组的版本没有研出来</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">sushu</span><span class="params">(<span class="type">int</span> n)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(n&lt;=<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;<span class="comment">//这里卡了好几次，实际上说n的问题的话应该就是落在最开始。早该想到的。</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    vector&lt;<span class="type">bool</span>&gt;<span class="built_in">zhishu</span>(n<span class="number">+1</span>,<span class="literal">true</span>);</span><br><span class="line">    zhishu[<span class="number">0</span>]=zhishu[<span class="number">1</span>]=<span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i*i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(zhishu[i])&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> j=i*i;j&lt;=n;j+=i)&#123;</span><br><span class="line">                zhishu[j] = <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> max = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">2</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(zhishu[i])&#123;</span><br><span class="line">            <span class="keyword">if</span>(max&lt;i)&#123;</span><br><span class="line">                max = i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> max;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line">    cin &gt;&gt; a;</span><br><span class="line">    <span class="keyword">while</span>(a--)&#123;</span><br><span class="line">        <span class="type">int</span> num;</span><br><span class="line">        cin &gt;&gt; num;</span><br><span class="line">        cout &lt;&lt; <span class="built_in">sushu</span>(num) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="最近发现自己似乎一些纯逻辑的自增能力不是很强"><a href="#最近发现自己似乎一些纯逻辑的自增能力不是很强" class="headerlink" title="最近发现自己似乎一些纯逻辑的自增能力不是很强"></a>最近发现自己似乎一些纯逻辑的自增能力不是很强</h2><p><em><a target="_blank" rel="noopener" href="https://xujcoj.com/home/contest/1869/problem/8">https://xujcoj.com/home/contest/1869/problem/8</a></em></p>
+<p>这其实是道循环综合题，虽然我觉得本质上和循环无关<br>有两种ac方式<br>1数学公式设参数<br>2逻辑自增</p>
+<p>上个学期实际上我就做过这道题了，事实证明，数学公式对代码逻辑的训练远远不够，我实际上是没记住的，而且2的逻辑美感强很多，那么这里就敲一下2的ac：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span><span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    cin &gt;&gt; n;</span><br><span class="line">    <span class="keyword">while</span>(n--)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//这里初始化几个变量</span></span><br><span class="line">        <span class="type">int</span> day;</span><br><span class="line">        cin &gt;&gt; day;</span><br><span class="line">        <span class="comment">//过去的天数</span></span><br><span class="line">        <span class="type">int</span> counter_day = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//阶段天数</span></span><br><span class="line">        <span class="type">int</span> now_day = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//总代码数、目标值</span></span><br><span class="line">        <span class="type">int</span> total = <span class="number">0</span>;</span><br><span class="line">        <span class="comment">//阶段代码数</span></span><br><span class="line">        <span class="type">int</span> now_num = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(counter_day &gt; now_day)&#123;</span><br><span class="line">            <span class="keyword">if</span>(day - counter_day &gt; now_day)&#123;</span><br><span class="line">                total += now_day*now_num;</span><br><span class="line">                counter_day += now_day;</span><br><span class="line">                now_num++;</span><br><span class="line">                now_day = now_num;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                total += now_day*now_num;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        cout &lt;&lt; total &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>收工。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/no_other_cloud/tags/cpp/" rel="tag"># cpp</a>
+              <a href="/no_other_cloud/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/no_other_cloud/2026/03/27/%E4%BB%8E0%E5%BC%80%E5%A7%8B%E8%A2%ABpwn%E6%AE%B4%E6%89%93%E6%97%A5%E8%AE%B0%EF%BC%881%EF%BC%89/" rel="prev" title="从0开始被pwn殴打日记（1）">
+                  <i class="fa fa-angle-left"></i> 从0开始被pwn殴打日记（1）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">充满了神入</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
